@@ -40,6 +40,9 @@ router.post('/book', upload.single('pdfFile'), async  (req, res, next) =>{
     if(!ejemplares){
         errors.push({Text: 'Porfavor realice lo solicitado'});
     }
+    if (!req.file) {
+        return res.status(400).send('No se envió ningún archivo');
+    }    
     if(errors.length > 0){
         res.render('/book', {
             errors,
